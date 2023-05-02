@@ -1,5 +1,5 @@
-import { BookOutlined, PoweroffOutlined, ReadOutlined } from '@ant-design/icons';
-import { Button, Menu } from 'antd';
+import { PoweroffOutlined } from '@ant-design/icons';
+import { Menu } from 'antd';
 import { useLocation, useNavigate } from "react-router-dom";
 import { usuarioContextValue } from './context/UsuarioContext';
 
@@ -19,7 +19,7 @@ export default function Layout({
     const menu = [
         {
             key: '',
-            label: <img className='menuPadding' style={{width:"160px"}} />,
+            label: <img className='menuPadding' style={{width:"40px"}} src='./img/mando.png' />,
         }, 
         ..._menu,
         {
