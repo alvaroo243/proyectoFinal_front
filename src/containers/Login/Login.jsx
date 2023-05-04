@@ -6,8 +6,6 @@ import BotonAccion from '../../components/Buttons/BotonAccion'
 import { validadorEmail } from '../../utils/utils'
 const ENV = import.meta.env
 
-const URL_LOGIN = `${ENV._BACK_URL}`
-
 export default function Login({
   titulo = "Login",
   onFinish = (_usuario) => {
@@ -24,14 +22,16 @@ export default function Login({
 
     try {
       
-      const {data: getLogin} = await request({
-        url: URL_LOGIN,
+      const getLogin = await request({
+        url: '/login',
         method: 'POST',
         options: {
           email: login.email,
           password: login.password
         }
       })
+
+      console.log( getLogin )
 
       if (getLogin && getLogin.token) {
         localStorage.setItem('token', getLogin.token)
@@ -49,7 +49,7 @@ export default function Login({
     <>
     <h2>{titulo}</h2>
     <Entrada 
-      label={"Entrada"}
+      label={"Email"}
       value={login.email}
       onChange={(valor) => {
         setLogin({...login, email: valor})

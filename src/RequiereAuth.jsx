@@ -1,19 +1,7 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useUsuarioContext } from "./context/UsuarioContext";
+import { compruebaToken } from "./utils/login";
 
-
-
-/**
- * @typedef RequireAuthDTO
- * @property {number} reValidaCadaXHora cada cuantas horas volverá a validar el token
- * @property {JSX.Element} children 
- */
-
-/**
- * Obliga la autenticacion antes de usar
- * @param {RequireAuthDTO} param0 
- * @returns { string | JSX.Element }
- */
 export default function RequiereAuth({
     accesos = {},
     children
@@ -63,8 +51,7 @@ export default function RequiereAuth({
     if ( jwtExp.exp * 1000 < Date.now() ) return window.location = '/login?logout';
     if ( !token ) return window.location = '/login?logout';
     
-    if ( usuario && (usuario.recuperar_contrasena || usuario.cambiar_contrasena) ) return navigate('/cambioContrasena');
-    if ( usuario && !resolvePermisos(usuario, accesos) ) return window.location = '/';
+    // if ( usuario && !resolvePermisos(usuario, accesos) ) return window.location = '/';
 
     return usuario && children;
 };

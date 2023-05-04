@@ -1,23 +1,5 @@
 import dayjs from "dayjs";
 
-/**
- * @typedef ObjCuando
- * @property {number} ts Timestamp en segundos
- * @property {string} str Fecha en formato "DD/MM/YYYY HH:mm" || "DD/MM/YYYY HH:mm:ss"
-*/
-
-/**
- * Genera un objeto genérico de fecha
- * @param {*} fecha Fecha compatible con dayjs.
- * @param {bool} segundos Booleano que determina si se devolvera el formato en con segundos incluidos con :ss
- * @returns {ObjCuando | null} Objeto de historico {ts, str}. (ts = timestamp segundos, str = "DD/MM/YYYY HH:mm")
- * @example
- * const cuando = generadorCuando(dayjs("2021-01-01"));
- * {
- * 	ts: 1577836800,
- * 	str: "01/01/2021 00:00"
- * }
-*/
 export const generadorCuando = function (fecha, format = "DD/MM/YYYY HH:mm") {
 
 	if (!fecha) fecha = dayjs();
@@ -41,20 +23,6 @@ export const generadorCuando = function (fecha, format = "DD/MM/YYYY HH:mm") {
 	
 };
 
-
-/**
- * @typedef ObjQuien
- * @property {number} id 
- * @property {string} username
- * @property {number} role
-*/
-
-/**
- * Genera un objeto genérico de `quien`
- * @param {*} objUsuario {}
- * @returns {ObjQuien} Objeto de quien {id, username, role}.
-*/
-
 export const generadorQuien = function (objUsuario = {}) {
 	
 	const {
@@ -73,12 +41,6 @@ export const generadorQuien = function (objUsuario = {}) {
 	
 };
 
-
-/**
- * Devuelve una query apartir de un object
- * @param {Object} options 
- * @returns {string}
- */
 export const generadorQuery = function (options){
 
 	const keys = Object.keys(options)
