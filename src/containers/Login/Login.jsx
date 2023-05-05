@@ -4,6 +4,7 @@ import Entrada from '../../components/Inputs/Entrada'
 import EntradaPassword from '../../components/Inputs/EntradaPassword'
 import BotonAccion from '../../components/Buttons/BotonAccion'
 import { validadorEmail } from '../../utils/utils'
+import { useUsuarioContext } from '../../context/UsuarioContext'
 const ENV = import.meta.env
 
 export default function Login({
@@ -34,7 +35,7 @@ export default function Login({
       console.log( getLogin )
 
       if (getLogin && getLogin.token) {
-        localStorage.setItem('token', getLogin.token)
+        localStorage.setItem('minijuegostoken', getLogin.token)
         return onFinish(getLogin)
       } else {
         setError(getLogin.message)
@@ -44,6 +45,14 @@ export default function Login({
       setError(error)      
     }
   }
+
+  const hacerLogout = () => {
+    localStorage.removeItem('minjuegostoken')
+    const [usuario, setUsuario] = useUsuarioContext()
+    return setUsuario(null)
+  }
+
+  if(window.location.search.includes('logout')) hacerLogout()
 
   return (
     <>

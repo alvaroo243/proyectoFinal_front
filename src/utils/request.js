@@ -18,7 +18,7 @@ export const request = async ({
 
     try {
         const headers = { headers: __headers }
-        if ( auth ) headers.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+        if ( auth ) headers.headers.Authorization = `Bearer ${localStorage.getItem('minijuegostoken')}`;
         if ( responseBuffer ) headers.responseType = 'arraybuffer';
         if ( sendFile ) headers.headers["Content-Type"] = 'multipart/form-data';
         
