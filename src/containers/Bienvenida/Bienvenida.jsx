@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import { request } from '../../utils/request';
+import Tetris from '../../components/Phaser/Tetris';
+import Juego from '../../components/Phaser/Juego';
 
 export default function Bienvenida() {
 
@@ -15,6 +17,7 @@ export default function Bienvenida() {
   return (
     <>
         <div>¡¡Bienvenido!!</div>
+        <Juego />
     </>
   )
 }

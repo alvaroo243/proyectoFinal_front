@@ -32,8 +32,6 @@ export default function Login({
         }
       })
 
-      console.log( getLogin )
-
       if (getLogin && getLogin.token) {
         localStorage.setItem('minijuegostoken', getLogin.token)
         return onFinish(getLogin)
