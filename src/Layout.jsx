@@ -3,13 +3,14 @@ import { Menu } from 'antd';
 import { useLocation, useNavigate } from "react-router-dom";
 import { usuarioContextValue } from './context/UsuarioContext';
 
-
+// En este componente lo que hacemos es crear el menu de superior para las rutas de las vistas 
 export default function Layout({
     menu: _menu,
     children
 }) {
 
     const usuario = usuarioContextValue();
+    console.log( usuario );
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -29,7 +30,7 @@ export default function Layout({
                     <PoweroffOutlined className='red'/>
                     <span
                         className='white'
-                        // children={ usuario.name.toUpperCase() }
+                        children={ usuario.email.toUpperCase() }
                     />
                 </div>
             ),

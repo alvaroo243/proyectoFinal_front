@@ -3,6 +3,7 @@ import { request } from '../../utils/request';
 import Tetris from '../../components/Phaser/Tetris';
 import Juego from '../../components/Phaser/Juego';
 
+// Vista de bienvenida
 export default function Bienvenida() {
 
     useEffect(() => {

@@ -1,5 +1,6 @@
 import { request } from "./request";
 
+// Comprobamos que todo ha ido bien y que el usuario y el token estan guardados
 export const compruebaToken = async (token) => {
 
     if ( token ) {

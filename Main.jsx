@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 import ReactDOM from 'react-dom/client'
 import './src/styles/styles.scss'
 
-// Importamos las vistas
+// Importamos las vistas con lazy para que no se realice el import hasta que no sea necesario
 const PaginaNoEncontrada = lazy(() => import('./src/containers/PaginaNoEncontrada'))
 const Login = lazy(() => import('./src/containers/Login/Login'))
 const RequiereAuth = lazy(() => import('./src/RequiereAuth'))

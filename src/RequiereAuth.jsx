@@ -2,6 +2,8 @@ import { useUsuarioContext } from "./context/UsuarioContext";
 import { compruebaToken } from "./utils/login";
 import { useCallback, useEffect } from "react";
 
+// Este componente lo utilizaremos para si necesita estar autorizado para acceder a la vista elegida
+// le deje acceder o no si existe el usuario y el token
 export default function RequiereAuth({
     accesos = {},
     children

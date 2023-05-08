@@ -1,5 +1,6 @@
 import { Input } from 'antd'
 
+// Componente que utilizaremos como un input de passwords
 export default function EntradaPassword({
     label,
     requerido,

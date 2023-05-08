@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+// Este componente lo que hara es mostrar un mensaje y un boton para volver a '/' si has intentado acceder a una pagina inexistente
 export default function PaginaNoEncontrada() {
   return (
     <div>

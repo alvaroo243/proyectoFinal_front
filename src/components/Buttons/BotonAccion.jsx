@@ -1,5 +1,6 @@
 import { Button } from 'antd'
 
+// Componente el cual es un boton que al apretarlo realizara acciones
 export default function BotonAccion({
     icon,
     text = "",

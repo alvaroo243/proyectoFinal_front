@@ -1,6 +1,7 @@
 import Input from 'antd/es/input/Input'
 import { validadorLetras, validadorNumeros } from '../../utils/utils'
 
+// Componente el cual utilizaremos como un input de strings o de numeros
 export default function Entrada({
     label,
     value = null,
