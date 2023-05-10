@@ -10,7 +10,6 @@ export default function Layout({
 }) {
 
     const usuario = usuarioContextValue();
-    console.log( usuario );
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -30,7 +29,7 @@ export default function Layout({
                     <PoweroffOutlined className='red'/>
                     <span
                         className='white'
-                        children={ usuario.email.toUpperCase() }
+                        children={ usuario.name.toUpperCase() }
                     />
                 </div>
             ),

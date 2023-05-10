@@ -1,6 +1,7 @@
 import { useUsuarioContext } from "./context/UsuarioContext";
 import { compruebaToken } from "./utils/login";
 import { useCallback, useEffect } from "react";
+import { resolvePermisos } from "./utils/utils";
 
 // Este componente lo utilizaremos para si necesita estar autorizado para acceder a la vista elegida
 // le deje acceder o no si existe el usuario y el token
@@ -38,7 +39,7 @@ export default function RequiereAuth({
     if (!token) return window.location = '/login?logout';
 
 
-    // if ( usuario && !resolvePermisos(usuario, accesos) ) return window.location = '/';
+    if ( usuario && !resolvePermisos(usuario, accesos) ) return window.location = '/';
 
     return usuario && children;
 };

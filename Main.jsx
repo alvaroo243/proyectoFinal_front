@@ -3,6 +3,10 @@ import { UsuarioProvider, useUsuarioContext } from "./src/context/UsuarioContext
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 import ReactDOM from 'react-dom/client'
 import './src/styles/styles.scss'
+import Registro from "./src/containers/Registro/Registro";
+import Buscar from "./src/containers/Buscar/Buscar";
+import { resolvePermisos } from "./src/utils/utils";
+import AdministrarUsuarios from "./src/containers/AdministrarUsuarios/AdministrarUsuarios";
 
 // Importamos las vistas con lazy para que no se realice el import hasta que no sea necesario
 const PaginaNoEncontrada = lazy(() => import('./src/containers/PaginaNoEncontrada'))
@@ -39,27 +43,62 @@ const Router = () => {
                     return navegar('/', {replace: true})
                 }}
             />
-        }
+        },
+        {
+            direccion: "/registro",
+            render: <Registro 
+                onFinish={() => navegar('/login', {replace: true})}
+            />
+        },
+        {
+            direccion: "/buscar",
+            render: <Buscar />,
+            autenticado: true,
+            layout: true,
+            menuRender: {
+                label: "Buscar",
+                key: "buscar",
+                // icon: 
+                // className: 
+            },
+            accesos: {
+                roles: [
+                    "ADMIN",
+                    "USER"
+                ]
+            }
+        },
+        {
+            direccion: "/administrarUsuarios",
+            render: <AdministrarUsuarios />,
+            autenticado: true,
+            layout: true,
+            menuRender: {
+                label: "Administrar Usuarios",
+                key: "administrarUsuarios"
+            },
+            accesos: {
+                roles: [
+                    "ADMIN"
+                ]
+            }
+        },
     ]
     
     // Se filtran las rutas que estan en el menu, luego pasa un objeto de los menus mas sus accesos
     // Por ultimo los que tienen submenus se miran sus accesos y luego el del menu principal
 
-    // const menuItems = rutas
-    // .filter(__ruta => __ruta.menuRender )
-    // .map(__ruta => {
-    //     return {
-    //         ...__ruta.menuRender,
-    //         accesos: __ruta.accesos
-    //     }
-    // }).filter(_menu => {
-    //     if ( _menu.children ) _menu.children = _menu.children.filter(_submenu => resolvePermisos(usuario,_submenu.accesos))
-    //     return resolvePermisos(usuario,_menu.accesos)
-    // });
-
-    const menuItems = rutas.filter(_ruta => _ruta.menuRender).map(_ruta => {
-        return {..._ruta.menuRender}
-    })
+    const menuItems = rutas
+    .filter(_ruta => _ruta.menuRender )
+    .map(_ruta => {
+        return {
+            ..._ruta.menuRender,
+            accesos: _ruta.accesos
+        }
+    }).filter(_menu => {
+        if ( _menu.children ) _menu.children = _menu.children.filter(_submenu => resolvePermisos(usuario,_submenu.accesos))
+        return resolvePermisos(usuario,_menu.accesos)
+    });
 
     return <Routes>
         {/* Hacemos un mapeo de las rutas */}

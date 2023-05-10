@@ -1,23 +1,15 @@
-#login {
+#registro {
     width: 30%;
     padding: 3em;
     box-shadow: 0px 0px 10px;
-
-
     h2 {
         margin-top: 0;
         font-size: 3em;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-        
     }
 }
 
-#contLogin {
+#contRegistro {
     background-image: url('/img/fondoLogin.gif'); 
     background-size: cover;
-}
-
-#registrate {
-    font-size: medium;
-    text-decoration: underline;
 }

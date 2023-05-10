@@ -6,12 +6,13 @@ export default function BotonAccion({
     text = "",
     className = "",
     children,
+    type = "primary",
     onClick = () => console.log( "Accion Boton" )
 }) {
   return (
     <Button
         children={children || text}
-        type='primary'
+        type={type}
         icon={icon}
         className={className}
         onClick={onClick}

@@ -12,6 +12,7 @@ export default function Entrada({
     className = "" ,
     error = "",
     onChange = (valor) => console.log( "Entrada", valor ),
+    onKeyDown = () => {}
 }) {
     const cambio = (valor) => {
         if(soloLetras && !validadorLetras.test(valor)) return
@@ -22,11 +23,13 @@ export default function Entrada({
 
   return (
     <>
-        <label>{label && <>{label}{requerido && <span className='red'>*</span>}</>}</label>
+        <label className='labelEntradas'>{label && <>{label}{requerido && <span className='red'>*</span>}</>}</label>
         <Input
+            className={className}
             value={value}
             type='text'
             onChange={(e) => cambio(e.currentTarget.value.replace(/ +/g, ' ').trimStart(' '))}
+            onKeyDown={onKeyDown}
         />
     </>
   )
