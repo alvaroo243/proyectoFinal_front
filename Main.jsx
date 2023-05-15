@@ -8,6 +8,7 @@ import Buscar from "./src/containers/Buscar/Buscar";
 import { resolvePermisos } from "./src/utils/utils";
 import AdministrarUsuarios from "./src/containers/AdministrarUsuarios/AdministrarUsuarios";
 import VerPerfil from "./src/containers/Perfil/VerPerfil";
+import Juegos from "./src/containers/Juegos/Juegos";
 
 // Importamos las vistas con lazy para que no se realice el import hasta que no sea necesario
 const PaginaNoEncontrada = lazy(() => import('./src/containers/PaginaNoEncontrada'))
@@ -56,6 +57,22 @@ const Router = () => {
             render: <Registro 
                 onFinish={() => navegar('/login', {replace: true})}
             />
+        },
+        {
+            direccion: "/juegos",
+            render: <Juegos />,
+            autenticado: true,
+            layout: true,
+            menuRender: {
+                label: "Juegos",
+                key: "juegos"
+            },
+            accesos: {
+                roles: [
+                    "ADMIN",
+                    "USER"
+                ]
+            }
         },
         {
             direccion: "/buscar",

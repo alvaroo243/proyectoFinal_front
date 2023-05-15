@@ -17,7 +17,6 @@ export default function Bienvenida() {
   return (
     <>
         <div>¡¡Bienvenido!!</div>
-        <TresEnRaya />
     </>
   )
 }

@@ -20,7 +20,7 @@ export default function EdicionPerfil({
         const usuarioEnvio = usuarioEditar
         delete usuarioEnvio.iat
         delete usuarioEnvio.exp
-        const {ok} = await request({
+        const {ok, token} = await request({
             url: "/usuarios/editar",
             method: "PUT",
             options: {
@@ -28,6 +28,9 @@ export default function EdicionPerfil({
             }
         })
 
+        if (!ok) return ok
+
+        localStorage.setItem('minijuegostoken', token)
         return ok
     }
 

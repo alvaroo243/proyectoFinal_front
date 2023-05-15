@@ -4,6 +4,27 @@ import Phaser from 'phaser';
 const TresEnRaya = () => {
     const gameRef = useRef(null);
 
+    function obtenerJugadorActual(celdas) {
+        // Utilizamos una variable para llevar un seguimiento del jugador actual
+        let jugadorActual = 'X'; // Asignamos 'X' como jugador inicial
+      
+        // Almacenamos el estado del juego en algún lugar (por ejemplo, un arreglo o una matriz)
+        // y determinamos si es el turno del jugador 'X' o 'O' en función de la cantidad de movimientos realizados
+        
+        // Aquí se asume que existe una variable llamada `estadoJuego` que almacena el estado actual del juego
+        const totalMovimientos = celdas.children.iterate(celda => celda !== '').length;
+        
+        // Determinamos el jugador actual en función de la cantidad de movimientos realizados
+        if (totalMovimientos % 2 === 0) {
+          jugadorActual = 'X';
+        } else {
+          jugadorActual = 'O';
+        }
+      
+        return jugadorActual;
+      }
+      
+
     useEffect(() => {
         const config = {
             type: Phaser.AUTO,
@@ -30,7 +51,7 @@ const TresEnRaya = () => {
 
         function create() {
             // Crear el tablero del tres en raya
-            this.add.image(250, 50, 'tile').setScale(0.1).setDepth(1)
+            this.add.image(250, 50, 'tile').setScale(0.1).setDepth(2)
             this.add.image(250, 250, 'bg').setScale(1.5, 2.5).setDepth(0)
             // Agregar el resto de elementos del juego (por ejemplo, celdas, jugadores)
             const celdas = this.add.group();
@@ -48,9 +69,25 @@ const TresEnRaya = () => {
             celdas.children.iterate((celda) => {
                 celda.setInteractive();
                 celda.on('pointerdown', () => {
-                    console.log("CLICK");
+                  // Verificar si la celda ya está ocupada
+                  if (!celda.getData('ocupada')) {
+                    // Obtener el jugador actual (X o O)
+                    const jugadorActual = obtenerJugadorActual(celdas); // Implementa tu propia lógica para determinar el jugador actual
+            
+                    // Cambiar la imagen de la celda según el jugador actual
+                    if (jugadorActual === 'X') {
+                    //   celda.setTexture('imagenX');
+                    } else {
+                    //   celda.setTexture('imagenO');
+                    }
+                    console.log( jugadorActual );
+            
+                    // Marcar la celda como ocupada
+                    celda.setData('ocupada', true);
+                  }
                 });
             });
+
 
         }
 
