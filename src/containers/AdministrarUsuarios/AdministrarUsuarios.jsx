@@ -1,10 +1,20 @@
 import React, { useState } from 'react'
 import Tabla from '../../components/Tablas/Tabla'
 import FiltrosUsuarios from './FiltrosUsuarios'
+import dayjs from 'dayjs';
+import { generadorCuando } from '../../utils/generador';
+import BotonAccion from '../../components/Buttons/BotonAccion';
+import { request } from '../../utils/request';
 
 export default function AdministrarUsuarios() {
 
     const [filtros, setFiltros] = useState({});
+    const [updateRequest, setUpdateRequest] = useState(true);
+
+    const defaultFilter = {
+        $gte: dayjs().startOf('day').unix(),
+        $lte: dayjs().endOf('day').unix()
+    }
 
     const columns = [
         {
@@ -34,6 +44,35 @@ export default function AdministrarUsuarios() {
             dataIndex: "creado",
             sorter: true,
             sorterId: 'creado',
+            render: (fecha) =>(fecha && generadorCuando(fecha * 1000, 'DD/MM/YYYY').str)
+        },
+        {
+            title: "Rol",
+            key: "role",
+            dataIndex: "role",
+            sorter: true,
+            sorterId: "role"
+        },
+        {
+            title: "Acciones",
+            key: "acciones",
+            dataIndex: "acciones",
+            render: (option, elem) => {
+                if (elem.username === "admin") return
+                return <>
+                    <BotonAccion 
+                        text='Eliminar'
+                        danger
+                        onClick={async () => {
+                            const {ok} = await request({
+                                url: `/usuarios/eliminar/${elem._id}`,
+                                method: "DELETE"
+                            })
+                            return setUpdateRequest(!updateRequest)
+                        }}
+                    />
+                </>
+            }
         }
     ]
 
@@ -41,8 +80,10 @@ export default function AdministrarUsuarios() {
     <div className='fdc aic'>
         <h1>Zona de Administracion de Usuarios</h1>
         <Tabla
+            tipoDato='usuarios'
             columns={columns}
             modalContent={({...props}) => <FiltrosUsuarios {...props}/> }
+            defaultFilter={{creado: defaultFilter}}
             filterCallback={(filtro) => {
                 setFiltros({...filtro})
             }}
@@ -53,6 +94,8 @@ export default function AdministrarUsuarios() {
                 url: "/usuarios",
                 method: "POST",
             }}
+            updateRequest={updateRequest}
+            setUpdateRequest={setUpdateRequest}
         />
     </div>
   )

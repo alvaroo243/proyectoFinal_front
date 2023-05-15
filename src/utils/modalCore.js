@@ -1,11 +1,12 @@
 import { Modal } from "antd";
+import '../styles/styles.scss'
 
 class ModalCore {
   ___modal = null;
 
   abrirModal = function (objModal, type) {
     this.___modal = Modal[type]({
-      className: "dw50 mw90",
+      className: "red",
       footer: null,
       destroyOnClose: true,
       maskClosable: true,

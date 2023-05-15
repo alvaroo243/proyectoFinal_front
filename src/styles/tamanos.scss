@@ -6,6 +6,10 @@
     height: 100vh;
 }
 
+.vh90 {
+    height: 90vh;
+}
+
 .w30 {
     width: 30%;
 }
@@ -14,6 +18,36 @@
     height: 30%;
 }
 
+.w100 {
+    width: 100%;
+}
+
+.w50 {
+    width: 50%;
+}
+
+.h100 {
+    height: 100%;
+}
+
 .fs2{
     font-size: 2em;
+}
+
+.brl {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.brr {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.pxw70 {
+    width: 70px;
 }

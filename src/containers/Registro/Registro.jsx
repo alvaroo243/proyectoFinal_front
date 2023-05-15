@@ -41,7 +41,7 @@ export default function Registro({
         if (!validaciones()) return
 
         try {
-            const creado = dayjs().startOf('day').format('DD/MM/YYYY')
+            const creado = dayjs().unix()
             const nuevoUsuario = { ...registro, creado: creado, role: "USER" };
             delete nuevoUsuario.repitePass
 

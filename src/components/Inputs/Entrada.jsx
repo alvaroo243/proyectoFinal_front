@@ -9,8 +9,7 @@ export default function Entrada({
     soloNumeros = false,
     soloLetras = false,
     regex = null,
-    className = "" ,
-    error = "",
+    className = "mb2" ,
     onChange = (valor) => console.log( "Entrada", valor ),
     onKeyDown = () => {}
 }) {

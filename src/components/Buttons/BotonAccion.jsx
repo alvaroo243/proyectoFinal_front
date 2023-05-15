@@ -7,7 +7,8 @@ export default function BotonAccion({
     className = "",
     children,
     type = "primary",
-    onClick = () => console.log( "Accion Boton" )
+    onClick = () => console.log( "Accion Boton" ),
+    ...options
 }) {
   return (
     <Button
@@ -16,6 +17,7 @@ export default function BotonAccion({
         icon={icon}
         className={className}
         onClick={onClick}
+        {...options}
     />
   )
 }

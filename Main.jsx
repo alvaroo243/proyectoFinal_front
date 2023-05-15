@@ -7,6 +7,7 @@ import Registro from "./src/containers/Registro/Registro";
 import Buscar from "./src/containers/Buscar/Buscar";
 import { resolvePermisos } from "./src/utils/utils";
 import AdministrarUsuarios from "./src/containers/AdministrarUsuarios/AdministrarUsuarios";
+import VerPerfil from "./src/containers/Perfil/VerPerfil";
 
 // Importamos las vistas con lazy para que no se realice el import hasta que no sea necesario
 const PaginaNoEncontrada = lazy(() => import('./src/containers/PaginaNoEncontrada'))
@@ -33,7 +34,13 @@ const Router = () => {
             direccion: "/",
             render: <Bienvenida />,
             layout: true,
-            autenticado: true
+            autenticado: true,
+            accesos: {
+                roles: [
+                    "ADMIN",
+                    "USER"
+                ]
+            }
         },
         {
             direccion: "/login",
@@ -83,6 +90,22 @@ const Router = () => {
                 ]
             }
         },
+        {
+            direccion:"/miperfil",
+            render: <VerPerfil />,
+            autenticado: true,
+            layout: true,
+            menuRender: {
+                label: "Mi Perfil",
+                key: "miperfil"
+            },
+            accesos: {
+                roles: [
+                    "ADMIN",
+                    "USER"
+                ]
+            }
+        }
     ]
     
     // Se filtran las rutas que estan en el menu, luego pasa un objeto de los menus mas sus accesos
@@ -134,7 +157,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 {/* // Creamos un Suspense el cual no es esencial ya que es solo para que aparezca lo que tu quieras mientras hay una gran 
 // carga en la pagina */}
             <Suspense fallback={
-                <div style={{width: "100vw", height: "100vh"}} className="fdc jcc aic"> 
+                <div className="fdc jcc aic vw100 vh100"> 
                     <img src="/img/cargando.gif" style={{width: "10em"}}/> 
                 </div>
             } >

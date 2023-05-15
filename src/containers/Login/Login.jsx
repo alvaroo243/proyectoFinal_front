@@ -22,15 +22,15 @@ export default function Login({
   const [error, setError] = useState(null)
 
   const validacion = () => {
-    if (!login.email || !login.password) {
+    if ((!login.email && !login.username) || !login.password) {
       setError("Email o contraseña vacios")
       return false
     }
-    if (!validadorEmail.test(login.email)) {
+    if (login.email &&!validadorEmail.test(login.email)) {
       setError("Email no valido.")
       return false
     }
-    if (login.email !== "admin@gmail.com" && login.password.length < 6) {
+    if ((login.email !== "admin@gmail.com" && login.username !== "admin") && login.password.length < 6) {
       setError("La contraseña tiene que ser mayor a 6 caracteres")
       return false
     }
@@ -49,6 +49,7 @@ export default function Login({
         method: 'POST',
         options: {
           email: login.email,
+          username: login.username,
           password: login.password
         }
       })
@@ -82,15 +83,21 @@ export default function Login({
         <h2 className='purple'>{titulo}<Link to={'/registro'}><p id='registrate' className='flr blue'>¡REGISTRATE!</p></Link></h2>
         <Entrada
           className='mb2'
-          label={"Email"}
-          value={login.email}
+          label={"Email o Username"}
+          value={login.email || login.username}
           onChange={(valor) => {
             if (!valor) {
               delete login.email
-              return setLogin({ ...login })
+              delete login.username
+              return setLogin({...login})
             }
-
-            setLogin({ ...login, email: valor })
+            if (valor.includes('@')) {
+              delete login.username
+              setLogin({ ...login, email: valor })
+            } else {  
+              delete login.email
+              setLogin({ ...login, username: valor })
+            }
             return setError(null)
           }}
           onKeyDown={async (ev) => {

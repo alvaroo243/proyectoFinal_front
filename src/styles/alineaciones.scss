@@ -3,9 +3,22 @@
     flex-direction: column;
 }
 
+.fdr {
+    display: flex;
+    flex-direction: row;
+}
+
 .jcc {
     display: flex;
     justify-content: center;
+}
+
+.jsr {
+    justify-self: flex-end;
+}
+
+.fb50 {
+    flex-basis: 50%;
 }
 
 .aic {
@@ -21,6 +34,10 @@
     align-self: flex-end;
 }
 
+.acc {
+    align-content: center;
+}
+
 .flr {
     float: right;
 }
@@ -29,3 +46,22 @@
     margin-bottom: 2em;
 }
 
+.mt2 {
+    margin-top: 2em;
+}
+
+.mt0 {
+    margin-top: 0;
+}
+
+.m2 {
+    margin: 2em;
+}
+
+.tar {
+    text-align: right;
+}
+
+.dib {
+    display: inline-block;
+}

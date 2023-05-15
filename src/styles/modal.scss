@@ -1,0 +1,45 @@
+.ant-modal, .ant-modal-confirm, .ant-modal-confirm-confirm {
+
+    width: 800px !important;
+    padding: 0px;
+
+    .ant-modal-content {
+
+        .modalContentGeneral {
+    
+            .inpBoxWra {
+    
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-gap: 3em;
+                justify-content: space-between;
+                align-items: flex-start;
+                align-items: center;
+                width: 100%;
+
+                .inpBox {
+
+                    width: 100%;
+                }
+
+            }
+    
+        }
+        
+        .ant-modal-body {
+            
+            .ant-modal-confirm-btns {
+    
+                display: flex;
+                justify-content: flex-end;
+                gap: 2em;
+
+            }
+
+        }
+
+
+    }
+
+
+}
