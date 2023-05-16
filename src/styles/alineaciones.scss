@@ -34,6 +34,10 @@
     align-self: flex-end;
 }
 
+.asl {
+    align-self: flex-start;
+}
+
 .acc {
     align-content: center;
 }
@@ -58,10 +62,27 @@
     margin: 2em;
 }
 
+.m3 {
+    margin: 3em;
+}
+
+.mlr5 {
+    margin-left: 5em;
+    margin-right: 5em;
+}
+
 .tar {
     text-align: right;
 }
 
+.tac {
+    text-align: center;
+}
+
 .dib {
     display: inline-block;
+}
+
+.pd10px {
+    padding: 10px;
 }

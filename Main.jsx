@@ -9,6 +9,7 @@ import { resolvePermisos } from "./src/utils/utils";
 import AdministrarUsuarios from "./src/containers/AdministrarUsuarios/AdministrarUsuarios";
 import VerPerfil from "./src/containers/Perfil/VerPerfil";
 import Juegos from "./src/containers/Juegos/Juegos";
+import Puntuaciones from "./src/containers/Puntuaciones/Puntuaciones";
 
 // Importamos las vistas con lazy para que no se realice el import hasta que no sea necesario
 const PaginaNoEncontrada = lazy(() => import('./src/containers/PaginaNoEncontrada'))
@@ -59,13 +60,29 @@ const Router = () => {
             />
         },
         {
-            direccion: "/juegos",
+            direccion: "/jugar",
             render: <Juegos />,
             autenticado: true,
             layout: true,
             menuRender: {
-                label: "Juegos",
-                key: "juegos"
+                label: "Jugar",
+                key: "jugar"
+            },
+            accesos: {
+                roles: [
+                    "ADMIN",
+                    "USER"
+                ]
+            }
+        },
+        {
+            direccion: "/puntuaciones",
+            render: <Puntuaciones />,
+            autenticado: true,
+            layout: true,
+            menuRender: {
+                label: "Puntuaciones",
+                key: "puntuaciones"
             },
             accesos: {
                 roles: [
