@@ -153,7 +153,7 @@ export default function Tabla({
 
         <div className={className}>
 
-            <h1 className="">{title}</h1>
+            <h3 className="">{title}</h3>
 
             <div className="">
 
@@ -263,7 +263,7 @@ export default function Tabla({
                     }
 
 
-                    <div className="tar fb50">
+                    <div className={`tar ${showBreadCrum || searchKey?"fb50": "fb100"}`}>
                         <Pagination
                             total={dataSource.total}
                             current={paginacion.paginaActual}

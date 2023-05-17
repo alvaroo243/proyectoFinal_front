@@ -23,7 +23,9 @@ export default function Buscar() {
             }}
           />
         </>
-      }
+      },
+      sorter: true,
+      sorterId: "username"
     },
   ]
 

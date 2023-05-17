@@ -17,9 +17,7 @@ export default function Juegos() {
             onClick={() => setJugarTresEnRaya(!jugarTresEnRaya)}
           />
           : <>
-            <TresEnRaya
-
-            />
+            <TresEnRaya/>
             <BotonAccion
               text='Cerrar'
               onClick={() => setJugarTresEnRaya(!jugarTresEnRaya)}
@@ -27,8 +25,9 @@ export default function Juegos() {
           </>
         }
       </div>
+      <h2></h2>
       <div className='mb2 fdc jcc aic'>
-        Hola
+        Nuevo juego
       </div>
 
     </div>
