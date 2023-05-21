@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { request } from '../../utils/request';
-import TresEnRaya from '../../components/Phaser/TresEnRaya';
 
 // Vista de bienvenida
 export default function Bienvenida() {
@@ -15,8 +14,11 @@ export default function Bienvenida() {
       }, [])
 
   return (
-    <>
-        <div>¡¡Bienvenido!!</div>
-    </>
+    <div className='fdc aic'>
+      <h1>¡¡BIENVENIDO!!</h1>
+      <div>
+        Esta web es una pequeña pagina de minjuegos que podrás disfrutar
+      </div>
+    </div>
   )
 }

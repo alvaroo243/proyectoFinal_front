@@ -3,13 +3,7 @@ import { UsuarioProvider, useUsuarioContext } from "./src/context/UsuarioContext
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 import ReactDOM from 'react-dom/client'
 import './src/styles/styles.scss'
-import Registro from "./src/containers/Registro/Registro";
-import Buscar from "./src/containers/Buscar/Buscar";
 import { resolvePermisos } from "./src/utils/utils";
-import AdministrarUsuarios from "./src/containers/AdministrarUsuarios/AdministrarUsuarios";
-import VerPerfil from "./src/containers/Perfil/VerPerfil";
-import Juegos from "./src/containers/Juegos/Juegos";
-import Puntuaciones from "./src/containers/Puntuaciones/Puntuaciones";
 
 // Importamos las vistas con lazy para que no se realice el import hasta que no sea necesario
 const PaginaNoEncontrada = lazy(() => import('./src/containers/PaginaNoEncontrada'))
@@ -17,6 +11,12 @@ const Login = lazy(() => import('./src/containers/Login/Login'))
 const RequiereAuth = lazy(() => import('./src/RequiereAuth'))
 const Layout = lazy(() => import('./src/Layout'))
 const Bienvenida = lazy(() => import('./src/containers/Bienvenida/Bienvenida'))
+const Registro = lazy(() => import('./src/containers/Registro/Registro'))
+const Buscar = lazy(() => import('./src/containers/Buscar/Buscar'))
+const AdministrarUsuarios = lazy(() => import('./src/containers/AdministrarUsuarios/AdministrarUsuarios'))
+const VerPerfil = lazy(() => import('./src/containers/Perfil/VerPerfil'))
+const Juegos = lazy(() => import('./src/containers/Juegos/Juegos'))
+const Puntuaciones = lazy(() => import('./src/containers/Puntuaciones/Puntuaciones'))
 
 
 // Creamos el componente Router

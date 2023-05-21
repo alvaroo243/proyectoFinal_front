@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Phaser from "phaser";
-import { useUsuarioContext } from "../../context/UsuarioContext";
-import { request } from "../../utils/request";
+import { useUsuarioContext } from "../../../context/UsuarioContext";
+import { request } from "../../../utils/request";
 
 export default function TresEnRaya({
 
@@ -72,7 +72,7 @@ export default function TresEnRaya({
         }
     }
 
-    function convertirCeldasAEstadoJuego() {
+    const convertirCeldasAEstadoJuego = () => {
         celdas.getChildren().forEach((celda, indice) => {
             const ocupada = celda.getData('ocupada');
             estadoJuego[indice] = ocupada ? celda.getData('jugador') : '';
@@ -80,8 +80,8 @@ export default function TresEnRaya({
     }
 
 
-    function verificarGanador(jugador) {
-        if(ganador) return false
+    const verificarGanador = (jugador) => {
+        if (ganador) return false
         const combinacionesGanadoras = [
             // Combinaciones horizontales
             [0, 1, 2],
@@ -103,7 +103,6 @@ export default function TresEnRaya({
                 estadoJuego[b] === jugador &&
                 estadoJuego[c] === jugador
             ) {
-                ganador = true
                 return true;
             }
         }
@@ -113,6 +112,7 @@ export default function TresEnRaya({
 
     const inicializar = (add) => {
         if (celdas) celdas.clear(true, true)
+        ganador = false
         celdas = add.group()
         const posX = 150;
         const posY = 200;
@@ -215,7 +215,7 @@ export default function TresEnRaya({
             this.load.image("trofeo", "/img/juegos/tresEnRaya/trofeo.png");
         }
 
-        function create() {
+        function create()  {
             const add = this.add
             // Crear el tablero del tres en raya
             add.image(250, 50, "tile").setScale(0.1).setDepth(2);
@@ -230,7 +230,7 @@ export default function TresEnRaya({
 
 
             // Agregar el resto de elementos del juego (por ejemplo, celdas, jugadores)
-            inicializar(add)
+            return inicializar(add)
         }
 
         async function update() {
@@ -243,6 +243,7 @@ export default function TresEnRaya({
             // Lógica de actualización del juego (por ejemplo, verificar si hay un ganador)
 
             if (verificarGanador('X')) {
+                ganador = true
                 console.log(`¡Ha ganado ${turno}!`);
                 if (turno === usuario.name) {
                     contadorVictorias++
@@ -260,6 +261,7 @@ export default function TresEnRaya({
                 }
                 return inicializar(add)
             } else if (verificarGanador('O')) {
+                ganador = true
                 console.log(`¡Ha ganado ${turno}!`);
                 if (turno === usuario.name) {
                     contadorVictorias++
@@ -278,6 +280,7 @@ export default function TresEnRaya({
             }
 
             if (obtenerCeldasDisponibles().length === 0) {
+                if (ganador) return
                 console.log("Empate");
                 this.rectanguloAlerta.setFillStyle(0xffa500)
                 alertaVisible = true;

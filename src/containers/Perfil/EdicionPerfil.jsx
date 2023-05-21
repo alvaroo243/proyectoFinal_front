@@ -20,6 +20,8 @@ export default function EdicionPerfil({
         const usuarioEnvio = usuarioEditar
         delete usuarioEnvio.iat
         delete usuarioEnvio.exp
+        delete usuarioEnvio.token
+        delete usuarioEnvio.message
         const {ok, token} = await request({
             url: "/usuarios/editar",
             method: "PUT",

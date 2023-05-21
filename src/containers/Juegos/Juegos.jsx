@@ -1,35 +1,51 @@
-import React, { useState } from 'react'
-import TresEnRaya from '../../components/Phaser/TresEnRaya'
-import BotonAccion from '../../components/Buttons/BotonAccion'
-import '../../styles/juegos.scss'
+import React, { useState } from "react";
+import TresEnRaya from "./TresEnRaya/TresEnRaya";
+import BotonAccion from "../../components/Buttons/BotonAccion";
+import "../../styles/juegos.scss";
+import BlackJack from "./BlackJack/BlackJack";
 
 export default function Juegos() {
-  const [jugarTresEnRaya, setJugarTresEnRaya] = useState(false)
+  const [jugarTresEnRaya, setJugarTresEnRaya] = useState(false);
+  const [jugarBlackJack, setJugarBlackJack] = useState(false);
   return (
-    <div id='juegos' className='fdc aic'>
+    <div id="juegos" className="fdc aic">
       <h1>Minijuegos</h1>
-      <h2>Tres En Raya</h2>
-      <div className='mb2 fdc jcc aic'>
-        {!jugarTresEnRaya ?
+      <h2>Tres en Raya</h2>
+      <div className="mb2 fdc jcc aic">
+        {!jugarTresEnRaya ? (
           <BotonAccion
-            className='w40'
-            text='JUEGA AL TRES EN RAYA'
+            className="w40"
+            text="JUEGA AL TRES EN RAYA"
             onClick={() => setJugarTresEnRaya(!jugarTresEnRaya)}
           />
-          : <>
-            <TresEnRaya/>
+        ) : (
+          <>
+            <TresEnRaya />
             <BotonAccion
-              text='Cerrar'
+              text="Cerrar"
               onClick={() => setJugarTresEnRaya(!jugarTresEnRaya)}
             />
           </>
-        }
+        )}
       </div>
-      <h2></h2>
-      <div className='mb2 fdc jcc aic'>
-        Nuevo juego
+      <h2>BlackJack</h2>
+      <div className="mb2 fdc jcc aic">
+        {!jugarBlackJack ? (
+          <BotonAccion
+            className="w40"
+            text="JUEGA AL BLACKJACK"
+            onClick={() => setJugarBlackJack(!jugarBlackJack)}
+          />
+        ) : (
+          <>
+            <BlackJack />
+            <BotonAccion
+              text="Cerrar"
+              onClick={() => setJugarBlackJack(!jugarBlackJack)}
+            />
+          </>
+        )}
       </div>
-
     </div>
-  )
+  );
 }
