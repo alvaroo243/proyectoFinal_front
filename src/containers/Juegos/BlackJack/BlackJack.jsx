@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import Phaser from "phaser";
 import { useUsuarioContext } from "../../../context/UsuarioContext";
 import { request } from "../../../utils/request";
-import { convertLegacyProps } from "antd/es/button/button";
 
 export default function BlackJack({
 
@@ -10,8 +9,8 @@ export default function BlackJack({
     const gameRef = useRef(null);
 
     let baraja
-    let contadorJugador
-    let contadorBanca
+    let contadorJugador = 0
+    let contadorBanca = 0
     let cartasJugador = []
     let cartasBanca = []
     let cartaJugador = null
@@ -27,7 +26,15 @@ export default function BlackJack({
     let plantado = false
     let maximoBanca = false
     let mensajePartida = null
-    let timer = 0
+    let cargando = false
+
+    const cogerBeneficios = async () => {
+        
+    }
+
+    const updateBeneficios = async () => {
+
+    }
 
     const [usuario, setUsuario] = useUsuarioContext()
 
@@ -94,9 +101,12 @@ export default function BlackJack({
         })
         ths.plantarseText = add.text(325, 240, "Plantarse", { color: "white", fontFamily: "Arial" }).setDepth(2)
         ths.textoApuesta = add.text(200, 200, "", { color: "white", fontFamily: "Arial" }).setDepth(2)
+        ths.contadorBanca = add.text(150, 20, "", { color: "white", fontFamily: "Arial", fontSize: "2em" }).setDepth(2)
+        ths.contadorJugador = add.text(150, 450, "", { color: "white", fontFamily: "Arial", fontSize: "2em" }).setDepth(2)
     }
 
     const generarBaraja = () => {
+        eliminarCartas()
         baraja = []
         contadorJugador = 0
         contadorBanca = 0
@@ -175,6 +185,8 @@ export default function BlackJack({
             ths.botonPlantarse.setVisible(false)
             ths.plantarseText.setText("")
             ths.textoApuesta.setText("")
+            ths.contadorBanca.setText("")
+            ths.contadorJugador.setText("")
         } else {
             ths.botonPedir.setVisible(true)
             ths.pedirText.setText("Pedir")
@@ -183,6 +195,8 @@ export default function BlackJack({
             ths.botonPlantarse.setVisible(true)
             ths.plantarseText.setText("Plantarse")
             ths.textoApuesta.setText(`Apuesta: ${apuesta}`)
+            ths.contadorBanca.setText(`Contador cartas: ${contadorBanca}`)
+            ths.contadorJugador.setText(`Contador cartas: ${contadorJugador}`)
         }
     }
 
@@ -318,9 +332,14 @@ export default function BlackJack({
                 }
             }
             if (maximoBanca && plantado) {
+                if (contadorBanca === contadorJugador) {
+                    return mensajePartida = "Empate"
+                }
                 if (contadorBanca > contadorJugador) {
+                    if (presupuesto >= 2000) return presupuesto -= apuesta
                     return mensajePartida = "Has perdido"
                 } else {
+                    presupuesto += apuesta
                     return mensajePartida = `Ha ganado ${usuario.name}`
                 }
             }
@@ -360,32 +379,30 @@ export default function BlackJack({
             generarBaraja()
         }
 
-        async function update(time) {
+        async function update() {
 
             const add = this.add
-            mostrarApostar(this)
-            mostrarJuego(this)
-            if (cartaJugador) mostrarCartaJugador(add)
-            if (cartaBanca) {
-                if (timer === 0) {
-                    mostrarCartaBanca()
-                    timer = time;
-                } else if (time - timer >= 2000) {
-                    mostrarCartaBanca()
-                    timer = 0;
+            if (!cargando) {
+                mostrarApostar(this)
+                mostrarJuego(this)
+                if (cartaJugador) mostrarCartaJugador(add)
+                if (cartaBanca) mostrarCartaBanca(add)
+                if (plantado) {
+                    if (!maximoBanca) {
+                        repartirCartaBanca()
+                    }
                 }
+                comprobarPartida()
             }
-            if (plantado) {
-                if (!maximoBanca) {
-                    repartirCartaBanca()
-                }
-            }
-            comprobarPartida()
             if (mensajePartida) {
-                console.log(mensajePartida);
-                setTimeout(() => {
-                    generarBaraja()
-                }, 2000)
+                if (!cargando) {
+                    console.log(mensajePartida);
+                    cargando = true
+                    setTimeout(() => {
+                        generarBaraja()
+                        cargando = false
+                    }, 3000)
+                }
             }
         }
 
