@@ -34,7 +34,7 @@ export default function Tabla({
     filterModalCallback = () => { },
     rowClassName,
     tipoDato = '',
-    heightTable = '60vh',
+    heightTable = '40vh',
     showBreadCrum = true,
     cargarSinFiltros = false,
     updateRequest = null,

@@ -27,13 +27,29 @@ export default function BlackJack({
     let maximoBanca = false
     let mensajePartida = null
     let cargando = false
+    let empate = false
 
     const cogerBeneficios = async () => {
-        
+        const {ok, puntuacion} = await request({
+            url: "/puntuaciones/blackJack",
+            method: "GET"
+        })
+
+        if (!ok) return 0
+
+        return puntuacion
     }
 
     const updateBeneficios = async () => {
+        const {ok} = await request({
+            url: "/puntuaciones/blackJack",
+            method: "POST",
+            options: {
+                presupuesto: (presupuesto - 1000)
+            }
+        })
 
+        if (!ok) console.log("No se ha podido guardar la partida"); 
     }
 
     const [usuario, setUsuario] = useUsuarioContext()
@@ -77,7 +93,7 @@ export default function BlackJack({
         ths.botonPedir = add.rectangle(140, 250, 100, 30, 0x808199).setStrokeStyle(2, 0x000000)
         ths.botonPedir.setInteractive()
         ths.botonPedir.on("pointerdown", () => {
-            if (!plantado) {
+            if (!plantado && !mensajePartida) {
                 repartirCartaJugador()
             }
         })
@@ -85,7 +101,7 @@ export default function BlackJack({
         ths.botonDoblar = add.rectangle(250, 250, 100, 30, 0x808199).setStrokeStyle(2, 0x000000)
         ths.botonDoblar.setInteractive()
         ths.botonDoblar.on("pointerdown", () => {
-            if (!plantado && presupuesto >= apuesta * 2) {
+            if (!plantado && presupuesto >= apuesta * 2 && !mensajePartida) {
                 apuesta = apuesta * 2
                 repartirCartaJugador()
                 plantado = true
@@ -95,7 +111,7 @@ export default function BlackJack({
         ths.botonPlantarse = add.rectangle(360, 250, 100, 30, 0x808199).setStrokeStyle(2, 0x000000)
         ths.botonPlantarse.setInteractive()
         ths.botonPlantarse.on("pointerdown", () => {
-            if (!plantado) {
+            if (!plantado && !mensajePartida) {
                 plantado = true
             }
         })
@@ -120,6 +136,7 @@ export default function BlackJack({
         plantado = false
         maximoBanca = false
         mensajePartida = null
+        empate = false
 
         const palos = ['pica', 'corazon', 'diamante', 'trebol'];
         const numeros = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -302,23 +319,15 @@ export default function BlackJack({
     }
 
     const comprobarPartida = () => {
+        if (plantado && contadorBanca >= 17 && contadorBanca <= 21 && !maximoBanca) {
+            return maximoBanca = true
+        }
         if (!mensajePartida) {
-            if (contadorJugador > 21) {
-                mensajePartida = "Has perdido"
-                if (presupuesto >= 2000) return presupuesto -= apuesta
-                return
-            }
-            if (contadorBanca > 21) {
-                mensajePartida = `Ha ganado ${usuario.name}`
-                return presupuesto += apuesta
-            }
-            if (plantado && contadorBanca >= 17 && contadorBanca <= 21 && !maximoBanca) {
-                return maximoBanca = true
-            }
             if (contadorJugador === 21) {
                 plantado = true
                 if (maximoBanca) {
                     if (contadorBanca === 21) {
+                        empate = true
                         return mensajePartida = "Empate"
                     } else {
                         if (cartasJugador.length === 2) {
@@ -331,12 +340,24 @@ export default function BlackJack({
                     }
                 }
             }
+            if (contadorJugador > 21) {
+                presupuesto -= apuesta
+                if (presupuesto < 1000 ) presupuesto = 1000
+                return mensajePartida = "Has perdido"
+            }
+            if (contadorBanca > 21) {
+                mensajePartida = `Ha ganado ${usuario.name}`
+                maximoBanca = true
+                return presupuesto += apuesta
+            }
             if (maximoBanca && plantado) {
                 if (contadorBanca === contadorJugador) {
+                    empate = true
                     return mensajePartida = "Empate"
                 }
                 if (contadorBanca > contadorJugador) {
-                    if (presupuesto >= 2000) return presupuesto -= apuesta
+                    presupuesto -= apuesta
+                    if (presupuesto < 1000 ) presupuesto = 1000
                     return mensajePartida = "Has perdido"
                 } else {
                     presupuesto += apuesta
@@ -372,33 +393,46 @@ export default function BlackJack({
             this.load.image("abajo", "/img/juegos/blackJack/flecha_abajo.png")
         }
 
-        function create() {
+        async function create() {
             const add = this.add
             add.image(0, 0, "fondo").setOrigin(0).setScale(1, 1.4)
             generarNecesario(this)
             generarBaraja()
+            const beneficio = await cogerBeneficios()
+            presupuesto += beneficio
         }
 
         async function update() {
 
             const add = this.add
-            if (!cargando) {
+            if (!cargando && !mensajePartida) {
                 mostrarApostar(this)
                 mostrarJuego(this)
+                comprobarPartida()
                 if (cartaJugador) mostrarCartaJugador(add)
-                if (cartaBanca) mostrarCartaBanca(add)
-                if (plantado) {
+                if (plantado && !mensajePartida) {
                     if (!maximoBanca) {
-                        repartirCartaBanca()
+                        cargando = true
+                        setTimeout(() => {
+                            repartirCartaBanca()
+                            cargando = false
+                        }, 1000)
                     }
                 }
-                comprobarPartida()
+                if (cartaBanca) mostrarCartaBanca(add)
             }
             if (mensajePartida) {
                 if (!cargando) {
                     console.log(mensajePartida);
+                    const textoPartida = add.text(170 ,240, mensajePartida, {color: "black", fontFamily: "Arial", fontSize: "2em"}).setDepth(5)
+                    const rectPartida = add.rectangle(250, 250, 200, 100, 0xFFDD33).setDepth(4)
                     cargando = true
+                    if (!empate) {
+                        await updateBeneficios()
+                    }
                     setTimeout(() => {
+                        textoPartida.destroy()
+                        rectPartida.destroy()
                         generarBaraja()
                         cargando = false
                     }, 3000)

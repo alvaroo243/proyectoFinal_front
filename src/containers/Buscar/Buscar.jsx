@@ -67,12 +67,12 @@ export default function Buscar() {
           <div className="fdr">
             <strong>Puntuaciones: </strong>
             <div>
-              {user.puntuaciones?.tresEnRaya && (
+              {user.puntuaciones?.tresEnRaya !== undefined && (
                 <div>
                   - Tres en Raya: {user.puntuaciones.tresEnRaya}
                 </div>
               )}
-              {user.puntuaciones?.blackJack && (
+              {user.puntuaciones?.blackJack !== undefined && (
                 <div>
                   - BlackJack: {user.puntuaciones.blackJack}
                 </div>
@@ -94,9 +94,9 @@ export default function Buscar() {
 
   return (
     <div className="fdc aic">
-      <h1>Buscar</h1>
+      <h1 className="tituloPagina">Buscar</h1>
       <Tabla
-        className="w50"
+        className="w50 bcg pd3em br10"
         onSearch={Text}
         searchKey="username"
         placeholderSearch="Username"

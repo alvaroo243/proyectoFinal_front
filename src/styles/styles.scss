@@ -13,10 +13,15 @@ html, body {
     height: 100vh;
     max-width: 100%;
     max-height: 100%;
+    min-height: 100%;
+    min-width: 100%;
 }
 
 body {
     margin: 0;
+    background-image: url('/img/fondo_web.jpg'); 
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .labelEntradas {
@@ -30,4 +35,15 @@ body {
 
 .pointer:hover {
     cursor: pointer;
+}
+
+.tituloPagina {
+    border-radius: 100px;
+    background-color: lightblue;
+    padding: 15px;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
 }

@@ -78,8 +78,9 @@ export default function AdministrarUsuarios() {
 
   return (
     <div className='fdc aic'>
-        <h1>Zona de Administracion de Usuarios</h1>
+        <h1 className='tituloPagina'>Zona de Administracion de Usuarios</h1>
         <Tabla
+        className='bcg br10 pd3em m2'
             tipoDato='usuarios'
             columns={columns}
             modalContent={({...props}) => <FiltrosUsuarios {...props}/> }

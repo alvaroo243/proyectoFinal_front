@@ -40,9 +40,7 @@ export default function Layout({
     
     return (
         <>
-            <header
-                className="heaPriWra"
-            >
+            <header>
                 <Menu 
                     theme='dark'
                     mode="horizontal"
@@ -58,9 +56,12 @@ export default function Layout({
                     }}
                 />
             </header>
-            <main className=''>
+            <main className='mh100'>
                 {children}
             </main>
+            <footer>
+                    HOLA
+            </footer>
         </>
     );
     

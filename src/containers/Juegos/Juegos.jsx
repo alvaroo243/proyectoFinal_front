@@ -9,7 +9,7 @@ export default function Juegos() {
   const [jugarBlackJack, setJugarBlackJack] = useState(false);
   return (
     <div id="juegos" className="fdc aic">
-      <h1>Minijuegos</h1>
+      <h1 className="tituloPagina">Minijuegos</h1>
       <h2>Tres en Raya</h2>
       <div className="mb2 fdc jcc aic">
         {!jugarTresEnRaya ? (

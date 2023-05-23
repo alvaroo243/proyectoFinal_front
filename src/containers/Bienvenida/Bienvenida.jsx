@@ -15,7 +15,7 @@ export default function Bienvenida() {
 
   return (
     <div className='fdc aic'>
-      <h1>¡¡BIENVENIDO!!</h1>
+      <h1 className='tituloPagina'>¡¡BIENVENIDO!!</h1>
       <div>
         Esta web es una pequeña pagina de minjuegos que podrás disfrutar
       </div>

@@ -4,6 +4,7 @@ import Tabla from '../../components/Tablas/Tabla'
 export default function Puntuaciones() {
 
   const [filtros, setFiltros] = useState({});
+  const [cargado, setCargado] = useState(false)
 
   const columnasTresEnRaya = [
     {
@@ -18,13 +19,28 @@ export default function Puntuaciones() {
       sorter: true,
       sorterId: "tresEnRaya"
     }
+  ];
+
+  const columnasBlackJack = [
+    {
+      title: "Username",
+      key: "username",
+      dataIndex: "username"
+    },
+    {
+      title: "Mejor Beneficio",
+      key: "blackJack",
+      dataIndex: "blackJack",
+      sorter: true,
+      sorterId: "blackJack"
+    }
   ]
 
   return (
     <div className='fdc aic'>
-      <h1>Puntuaciones</h1>
-      <div className='w50'>
-        <Tabla 
+      <h1 className='tituloPagina'>Puntuaciones</h1>
+      <div className='w50 bcg pd3em mb2 br10'>
+        <Tabla
           title={"Mejores puntuaciones Tres En Raya"}
           showBreadCrum={false}
           columns={columnasTresEnRaya}
@@ -39,7 +55,33 @@ export default function Puntuaciones() {
           filterModalCallback={(filtro) => {
             setFiltros({ ...filtros, ...filtro })
           }}
+          tablaCargada={(cargando) => {
+            setCargado(true)
+          }}
         />
+      </div>
+      <div className='w50 bcg pd3em mb2 br10'>
+        {
+          cargado &&
+          <Tabla
+            className=''
+            title={"Mejores puntuaciones BlackJack"}
+            showBreadCrum={false}
+            columns={columnasBlackJack}
+            key={"TablaBlackJack"}
+
+            request={{
+              url: "/puntuaciones/blackJack/todas",
+              method: "POST"
+            }}
+            filterCallback={(filtro) => {
+              setFiltros({ ...filtro })
+            }}
+            filterModalCallback={(filtro) => {
+              setFiltros({ ...filtros, ...filtro })
+            }}
+          />
+        }
       </div>
     </div>
   )

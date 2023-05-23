@@ -64,16 +64,16 @@ export default function VerPerfil() {
                     <strong>Biografía: </strong> {usuario.biografia}
                 </div>
                 <div className='fdr'>
-                    <strong>Puntuaciones: </strong> 
+                    <strong>Puntuaciones: </strong>
                     <div>
                         {
-                            puntuaciones?.tresEnRaya &&
+                            puntuaciones?.tresEnRaya !== undefined &&
                             <div>
                                 - Tres en Raya: {puntuaciones.tresEnRaya}
                             </div>
                         }
-                        {
-                            puntuaciones?.blackJack &&
+                        { 
+                            puntuaciones?.blackJack !== undefined &&
                             <div>
                                 - BlackJack: {puntuaciones.blackJack}
                             </div>
