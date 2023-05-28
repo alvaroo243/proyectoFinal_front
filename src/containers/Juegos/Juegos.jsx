@@ -14,6 +14,7 @@ export default function Juegos() {
       <div className="mb2 fdc jcc aic">
         {!jugarTresEnRaya ? (
           <BotonAccion
+            id="raya"
             className="w40"
             text="JUEGA AL TRES EN RAYA"
             onClick={() => setJugarTresEnRaya(!jugarTresEnRaya)}
@@ -32,6 +33,7 @@ export default function Juegos() {
       <div className="mb2 fdc jcc aic">
         {!jugarBlackJack ? (
           <BotonAccion
+            id="black"
             className="w40"
             text="JUEGA AL BLACKJACK"
             onClick={() => setJugarBlackJack(!jugarBlackJack)}

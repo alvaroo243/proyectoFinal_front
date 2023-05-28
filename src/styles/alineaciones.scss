@@ -13,6 +13,21 @@
     justify-content: center;
 }
 
+.jcsa {
+    display: flex;
+    justify-content: space-around;
+}
+
+.jcse {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.acsa {
+    display: flex;
+    align-content: space-around;
+}
+
 .jsr {
     justify-self: flex-end;
 }
