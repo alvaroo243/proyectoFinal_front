@@ -38,7 +38,7 @@ export default function VerPerfil() {
     }, [])
 
     return (
-        <div id='perfil' className='jdc jcc aic vh90 '>
+        <div id='perfil' className='jdc jcc aic h100'>
             <div>
                 <h1><strong className={usuario.color?usuario.color: "black"}>{usuario.name.toUpperCase()}</strong>
                     <ModalRender 

@@ -1,4 +1,5 @@
-import { cloneElement, useState } from 'react';
+import { useState } from 'react';
+import { RollbackOutlined } from '@ant-design/icons';
 import Entrada from '../../components/Inputs/Entrada'
 import EntradaPassword from '../../components/Inputs/EntradaPassword'
 import '../../styles/registro.scss'
@@ -7,6 +8,7 @@ import { validadorEmail } from '../../utils/utils';
 import dayjs from 'dayjs';
 import { request } from '../../utils/request';
 import { message } from 'antd';
+import { Link } from 'react-router-dom';
 
 export default function Registro({
     titulo = "REGISTRO",
@@ -69,7 +71,7 @@ export default function Registro({
     return (
         <div id='contRegistro' className='fdc jcc aic vh100'>
             <div id='registro' className='bg-white fdc'>
-                <h2 className='purple'>{titulo}</h2>
+                <h2 className='purple'>{titulo}<Link to={'/login'}><p id='atras' className='flr black'><RollbackOutlined /></p></Link></h2>
                 <Entrada
                     className='mb2'
                     label={"Nombre"}

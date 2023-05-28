@@ -1,4 +1,4 @@
-import { PoweroffOutlined } from '@ant-design/icons';
+import { LogoutOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { useLocation, useNavigate } from "react-router-dom";
 import { usuarioContextValue } from './context/UsuarioContext';
@@ -26,7 +26,7 @@ export default function Layout({
             key: "logout#link",
             label: (
                 <div>
-                    <PoweroffOutlined className='red'/>
+                    <LogoutOutlined className='red' />
                     <span
                         className='white'
                         children={ usuario.name.toUpperCase() }
@@ -40,7 +40,7 @@ export default function Layout({
     
     return (
         <>
-            <header>
+            <header className='vh5'>
                 <Menu 
                     theme='dark'
                     mode="horizontal"
@@ -56,10 +56,10 @@ export default function Layout({
                     }}
                 />
             </header>
-            <main className='mh100'>
+            <main className='mvh85'>
                 {children}
             </main>
-            <footer>
+            <footer className='vh10 bcg'>
                     HOLA
             </footer>
         </>
