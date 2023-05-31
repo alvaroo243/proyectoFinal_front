@@ -1,6 +1,7 @@
-
 import TextArea from "antd/lib/input/TextArea";
 
+// Componente que utilizaremos para escribir textos largos
+// Creamos el componente
 const EntradaTextArea = ({
     titulo,
     value = null,
@@ -11,6 +12,7 @@ const EntradaTextArea = ({
     ...options
 }) => {
 
+    // Devuelve un label y un TextArea
     return (
         <>
             <label className="labelEntradas">{titulo}</label>

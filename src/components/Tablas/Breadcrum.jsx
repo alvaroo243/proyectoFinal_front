@@ -1,17 +1,21 @@
-import { CheckCircleOutlined, CloseCircleOutlined, CopyOutlined, DeleteOutlined, EditOutlined, RetweetOutlined } from "@ant-design/icons";
+import { CheckCircleOutlined, CloseCircleOutlined, CopyOutlined, EditOutlined, RetweetOutlined } from "@ant-design/icons";
 import { Input, message, Tag } from "antd";
 import { useState } from "react";
 import LimpiarBoton from "../Buttons/LimpiarBoton";
 
+// Componente que utilizaremos para mostrar la llamada que se hace a mongoDb para filtrar el boton de Default y el de Limpiar
 export default function Breadcrum({
     json = {},
     jsonDefault = {},
     onChange = () => { console.log('cambiado breadcrum') }
 }) {
 
+    // Convertimos a Json el filtro que se utilice
     const strJson = JSON.stringify(json);
+    // Convertimos a Json el filtro por defecto
     const strJsonDefault = JSON.stringify(jsonDefault);
 
+    // Creamos los useStates
     const [editando, setEditando] = useState(false);
     const [breadcrum, setBreadcrum] = useState(null);
 
@@ -39,6 +43,7 @@ export default function Breadcrum({
 
     }
 
+    // Devolveremos un Tag si esta cargando y tres Tags si no esta cargando segun los casos
     return (
 
         <div aria-label="breadcrum" className="mb2">

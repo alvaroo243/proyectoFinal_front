@@ -1,4 +1,3 @@
-import React from 'react'
 import Entrada from '../../components/Inputs/Entrada'
 import EntradaRangoFechas from '../../components/Inputs/EntradaRangoFechas'
 import EntradaSelect from '../../components/Inputs/EntradaSelect'

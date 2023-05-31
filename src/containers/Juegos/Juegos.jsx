@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import TresEnRaya from "./TresEnRaya/TresEnRaya";
 import BotonAccion from "../../components/Buttons/BotonAccion";
 import "../../styles/juegos.scss";

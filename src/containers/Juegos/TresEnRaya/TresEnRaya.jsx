@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Phaser from "phaser";
 import { useUsuarioContext } from "../../../context/UsuarioContext";
 import { request } from "../../../utils/request";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Tabla from "../../components/Tablas/Tabla";
 import BotonAccion from "../../components/Buttons/BotonAccion";
 import { modalCore } from "../../utils/modalCore";
