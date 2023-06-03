@@ -28,8 +28,6 @@ export default function TresEnRaya({
                 puntuacion: contadorVictorias
             }
         })
-
-        contadorVictorias = 0
         ganador = false
 
         if (ok) console.log("Nuevo Record");
@@ -257,8 +255,9 @@ export default function TresEnRaya({
                     alertaVisible = true;
                     alertaTexto = "Has perdido"
                     this.puntuaje.setText(0)
-                    await actualizarMarcador()
+                    contadorVictorias = 0
                 }
+                await actualizarMarcador()
                 return inicializar(add)
             } else if (verificarGanador('O')) {
                 ganador = true
@@ -274,8 +273,9 @@ export default function TresEnRaya({
                     alertaVisible = true;
                     alertaTexto = "Has perdido"
                     this.puntuaje.setText(0)
-                    await actualizarMarcador()
+                    contadorVictorias = 0
                 }
+                await actualizarMarcador();
                 return inicializar(add)
             }
 

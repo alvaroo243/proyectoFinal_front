@@ -59,32 +59,19 @@ export default function Layout({
             <main className='mvh85'>
                 {children}
             </main>
-            <footer className='vh50 fdr jcc aic jcse'>
-                <div>
-                    <Calendar
-                        fullscreen={false}
-                        style={{
-                            width: 300,
-                            border: `1px solid`,
-                            borderRadius: "10px",
-                        }}
-
-                    />
-                </div>
-                <div id='separador'></div>
-                <div className='fdc aic'>
-                    <div className='mb2'>
+            <footer className='vh20 fdr jcc aic jcse'>
+                <div className='mb2'>
                         <Link
                             to={"https://ieslluissimarro.org/"}
                             target='_blank'
                         >
                             <img
                                 src='/img/simarro.png'
-                                width={"250px"}
+                                width={"150px"}
                             />
                         </Link>
-                    </div>
-                    <div className='mb2'>
+                </div>
+                <div className='mb2'>
                         <Link
                             to={"https://es.react.dev/"}
                             target='_blank'
@@ -94,8 +81,8 @@ export default function Layout({
                                 width={"100px"}
                             />
                         </Link>
-                    </div>
-                    <div>
+                </div>
+                <div>
                         <Link
                             to={"https://ant.design/"}
                             target='_blank'
@@ -105,7 +92,6 @@ export default function Layout({
                                 width={"100px"}
                             />
                         </Link>
-                    </div>
                 </div>
             </footer>
         </>

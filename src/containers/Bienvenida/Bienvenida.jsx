@@ -18,7 +18,7 @@ export default function Bienvenida() {
     <div className='fdc aic'>
       <h1 className='tituloPagina'>¡¡BIENVENIDO!!</h1>
       <div>
-        Esta web es una pequeña pagina de minjuegos que podrás disfrutar.
+        Esta web es una pequeña pagina de minjuegos donde podrás disfrutar.
       </div>
       <hr></hr>
       <div className='fdr jcsa aic w80'>
@@ -33,7 +33,7 @@ export default function Bienvenida() {
         <div>
           <Link to={'/jugar'}>
             <img
-              src='/img/juegos/black.png'
+              src='/img/juegos/black.jpg'
               width={"300px"}
             />
           </Link>
