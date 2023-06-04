@@ -19,6 +19,7 @@ export default function Breadcrum({
     const [editando, setEditando] = useState(false);
     const [breadcrum, setBreadcrum] = useState(null);
 
+    // Esta funcion la utilizaremos para parsear el filtro que mandemos a JSON para que mongo lo pueda leer
     const enviaBreadcrum = () => {
 
         try {
@@ -31,6 +32,7 @@ export default function Breadcrum({
         return setEditando(!editando)
     }
 
+    // Esta función la utilizaremos para que se copie el breadcrum al clipboard
     const copyClipboard = () => {
         let __message = 'Copiado';
         try {
@@ -43,10 +45,12 @@ export default function Breadcrum({
 
     }
 
-    // Devolveremos un Tag si esta cargando y tres Tags si no esta cargando segun los casos
+    // Devolveremos un Tag  que variara segun si esta cargando o no, y a parte un boton de Default(si hay default) y de Limpiar
     return (
 
         <div aria-label="breadcrum" className="mb2">
+            {/* Tag para mostrar el Breadcrum */}
+            {/* Si se esta editando aparedera cargando, sinos aparecera el breadcrum con un boton de editar y de copiar */}
             <Tag>
 
                 {editando
@@ -97,6 +101,7 @@ export default function Breadcrum({
                 }
 
             </Tag>
+            {/* Si existe default aparecera el boton de Default para aplicar el filtro por defecto */}
             {strJsonDefault !== '{}' && (
                 <Tag
                     className="pointer"
@@ -108,6 +113,7 @@ export default function Breadcrum({
                     Default <RetweetOutlined />
                 </Tag>
             )}
+            {/* Si hay algun filtro aplicado aparecerá el boton de limipiar que borrara todo tipo de filtro que haya aplicado */}
             {strJson !== '{}' && (
                 <LimpiarBoton
                     onClick={() => { return onChange({}) }}

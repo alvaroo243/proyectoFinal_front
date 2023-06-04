@@ -2,17 +2,8 @@ import { useEffect } from 'react'
 import { request } from '../../utils/request';
 import { Link } from 'react-router-dom';
 
-// Vista de bienvenida
+// Este componente lo gastaremos para mostrar la vista de Bienvenida
 export default function Bienvenida() {
-
-  useEffect(() => {
-    (async () => {
-      const { ok, list } = await request({
-        url: "/prueba"
-      })
-      console.log(list);
-    })()
-  }, [])
 
   return (
     <div className='fdc aic'>
@@ -23,6 +14,7 @@ export default function Bienvenida() {
       <hr></hr>
       <div className='fdr jcsa aic w80'>
         <div>
+          {/* Hacemos un linck a la pagina de juegos, para cuando se haga click en la imagen */}
           <Link to={"/jugar"}>
             <img
               src='/img/juegos/Raya.png'

@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import Tabla from '../../components/Tablas/Tabla'
 
+// Componente que utilizaremos para mostrar las puntuaciones de cada jugador
 export default function Puntuaciones() {
 
+  // Creamos los useStates
   const [filtros, setFiltros] = useState({});
   const [cargado, setCargado] = useState(false)
 
+  // Creamos las columnas que tendra la tabla de puntuaciones de TresEnRaya
   const columnasTresEnRaya = [
     {
       title: "Username",
@@ -21,6 +24,7 @@ export default function Puntuaciones() {
     }
   ];
 
+  // Creamos las columnas que tendra la tabla de puntuaciones de BlackJack
   const columnasBlackJack = [
     {
       title: "Username",
@@ -36,6 +40,7 @@ export default function Puntuaciones() {
     }
   ]
 
+  // Devolvemos la tabla de puntuaciones de TresEnRaya y de BlackJack
   return (
     <div className='fdc aic'>
       <h1 className='tituloPagina'>Puntuaciones</h1>
@@ -56,11 +61,13 @@ export default function Puntuaciones() {
             setFiltros({ ...filtros, ...filtro })
           }}
           tablaCargada={(cargando) => {
+            // Cuando cargue cambia a true
             setCargado(true)
           }}
         />
       </div>
       <div className='w50 bcg pd3em mb2 br10'>
+        {/* Cuando la tabla de TresEnRaya haya cargado, esta aparecerá */}
         {
           cargado &&
           <Tabla

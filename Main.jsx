@@ -60,14 +60,20 @@ const Router = () => {
             />
         },
         {
+            // Dirección de la vista
             direccion: "/jugar",
+            // Que mostrará cuando renderice
             render: <Juegos />,
+            // Si necesita autenticacion para acceder
             autenticado: true,
+            // Si aparecerá el layout en la vista
             layout: true,
+            // Como saldrá en el menu
             menuRender: {
                 label: "Jugar",
                 key: "jugar"
             },
+            // Los accesos que tendrá
             accesos: {
                 roles: [
                     "ADMIN",

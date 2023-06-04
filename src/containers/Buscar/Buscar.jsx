@@ -5,11 +5,14 @@ import { modalCore } from "../../utils/modalCore";
 import { generadorCuando } from "../../utils/generador";
 import { request } from "../../utils/request";
 
+// Este componente lo utilizaremos para la vista de Buscar
 export default function Buscar() {
 
+  // UseStates
   const [filtros, setFiltros] = useState({});
 
 
+  // Buscaremos la puntuacion de el jugador seleccionado
   const puntuacionesJugador = async (username) => {
     const puntuaciones = await request({
       url: "/puntuaciones",
@@ -21,6 +24,7 @@ export default function Buscar() {
     return puntuaciones
   };
 
+  // Creamos las columnas de la zona de busqueda
   const columns = [
     {
       title: "Username",
@@ -46,6 +50,7 @@ export default function Buscar() {
     },
   ];
 
+  // Creamos el modal que mostrará la información de los jugadores
   const objModal = (user) => {
     return {
       title: <h3 className={user.color ? user.color : "black"}>{user.name}</h3>,
@@ -92,6 +97,7 @@ export default function Buscar() {
     };
   };
 
+  // Devolvemos la tabla con su campo de busqueda y su paginacin y sin breadcrum
   return (
     <div className="fdc aic">
       <h1 className="tituloPagina">Buscar</h1>

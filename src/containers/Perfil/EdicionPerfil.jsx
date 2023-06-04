@@ -7,21 +7,27 @@ import { validadorEmail } from '../../utils/utils';
 import { message } from 'antd';
 import EntradaSelect from '../../components/Inputs/EntradaSelect';
 
+// Componente que utilizaremos para mostrar el Modal de EdicionPerfil
 export default function EdicionPerfil({
+    // Cogemos props
     usuario, 
     setUsuario,
     cerrarModal
 }) {
-    
+    // Creamos los useStates
     const [usuarioEditar, setUsuarioEditar] = useState(usuario);
     const [errores, setErrores] = useState(null);
     
+    // Función que utilizaremos para editar el usuario
     const editarUsuario = async () => {
         const usuarioEnvio = usuarioEditar
+        // Eliminamos información que no queremos del usuario
         delete usuarioEnvio.iat
         delete usuarioEnvio.exp
         delete usuarioEnvio.token
         delete usuarioEnvio.message
+        // Hacemos la llamada y cogemos un nuevo token con la información cambiada
+        // Si no hiciesemos esto no se cambiaria la información del context y habria que cerrar sesión y volver a iniciar
         const {ok, token} = await request({
             url: "/usuarios/editar",
             method: "PUT",
@@ -32,10 +38,12 @@ export default function EdicionPerfil({
 
         if (!ok) return ok
 
+        // Seteamos el nuevo token
         localStorage.setItem('minijuegostoken', token)
         return ok
     }
 
+    // Comprobamos si existe usuario o no a la hora de editar el username o el email
     const existeUsuario = async () =>{
         const {existe, error} = await request({
             url: "/usuarios/validar",
@@ -49,6 +57,7 @@ export default function EdicionPerfil({
         return existe
     }
 
+    // Comprobamos que se haya editado algun campo para poder enviar la peticion
     const comprobarEdicion = () => {
         if (usuario.name !== usuarioEditar.name) return true
         if (usuario.username !== usuarioEditar.username) return true
@@ -59,6 +68,7 @@ export default function EdicionPerfil({
         return false
     }
 
+    // Validamos los campos necesarios
     const validarEdicion = async () => {
         if (!usuarioEditar.name || !usuarioEditar.username || !usuarioEditar.email) {
             setErrores("No pueden haber campos vacios (exceptuando biografía)")
@@ -72,6 +82,7 @@ export default function EdicionPerfil({
         return !existe
     }
 
+    // Creamos lista de el select colores
     const colores = [
         {
             key: "black",
@@ -116,6 +127,7 @@ export default function EdicionPerfil({
         
     ]
 
+    // Devolvemos el modal con los campos necesarios para editar al usuario
     return (
         <>
             <div>
@@ -200,9 +212,12 @@ export default function EdicionPerfil({
                     onClick={async () => {
                         const validar = await validarEdicion()
                         if (!comprobarEdicion() || !validar) return;
+                        // Si pasa la validacion y el comprobarEdicion
                         const editar = await editarUsuario()
                         if (!editar) return;
+                        // Si se ha editado correctamente
                         message.success("Usuario editado correctamente")
+                        // Seteamos el usuarioContext
                         setUsuario(usuarioEditar)
                         return cerrarModal()
                     }}

@@ -2,11 +2,13 @@ import Entrada from '../../components/Inputs/Entrada'
 import EntradaRangoFechas from '../../components/Inputs/EntradaRangoFechas'
 import EntradaSelect from '../../components/Inputs/EntradaSelect'
 
+// Este componente lo utilizará la vista de Administración de usuarios para aplicar los filtros a la tabla
 export default function FiltrosUsuarios({
     filtros,
     setFiltros
 }) {
 
+    // Creamos el listado que tendra el select de roles
     const listadoRoles = [
         {
             key: "admin",
@@ -20,6 +22,7 @@ export default function FiltrosUsuarios({
         }
     ]
 
+    // Devolvemos todos Inpust que tendrá el modal para hacer la busqueda
   return (
     <div>
         <div>
@@ -58,6 +61,7 @@ export default function FiltrosUsuarios({
                     options: {
                         filtros: filtros
                     },
+                    // Indicamos el formato del select
                     formato: {
                         key: '_id',
                         label: 'email',
@@ -84,6 +88,7 @@ export default function FiltrosUsuarios({
 
                     return setFiltros({...filtros, creado: value})
                 }}
+                // Indicamo los parametros que pasaremos
                 params={['$gte', '$lte']}
             />
             <EntradaSelect
