@@ -149,7 +149,7 @@ const Router = () => {
     ]
     
     // Se filtran las rutas que estan en el menu, luego pasa un objeto de los menus mas sus accesos
-    // Por ultimo los que tienen submenus se miran sus accesos y luego el del menu principal
+    // Por ultimo filtramos las rutas por las que el usuario tiene acceso
 
     const menuItems = rutas
     .filter(_ruta => _ruta.menuRender )
@@ -159,7 +159,6 @@ const Router = () => {
             accesos: _ruta.accesos
         }
     }).filter(_menu => {
-        if ( _menu.children ) _menu.children = _menu.children.filter(_submenu => resolvePermisos(usuario,_submenu.accesos))
         return resolvePermisos(usuario,_menu.accesos)
     });
 
